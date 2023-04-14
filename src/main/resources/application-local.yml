@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/voting'
+    username: 'rootvoting'
+    password: 'voting@123'
+  data:
+    redis:
+      ssl: false
+      password: Redis@123
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+
+configs:
+  kafka:
+    bootstrap-servers: localhost:9092
+    schema-registry-url: http://localhost:8081

@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:7.0.8-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    command: redis-server --appendonly yes --requirepass Redis@123
+    networks:
+      - local-voting-service
+
+  postgres:
+    image: postgres:15.2-alpine
+    container_name: postgres-voting-service
+    environment:
+      POSTGRES_USER: rootvoting
+      POSTGRES_PASSWORD: voting@123
+      POSTGRES_DB: voting
+    volumes:
+      - ./backup/postgres/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - local-voting-service
+
+  app:
+    container_name: voting-service-app
+    image: 'voting-service:latest'
+    build:
+      context: ./
+      args:
+        - JAR_FILE=build/libs/\*.jar
+    tty: true
+    stdin_open: true
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 512M
+        reservations:
+          memory: 128M
+    networks:
+      - local-voting-service
+
+networks:
+  local-voting-service:
+    driver: bridge
