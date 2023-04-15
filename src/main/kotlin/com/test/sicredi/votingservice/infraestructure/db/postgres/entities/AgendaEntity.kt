@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 @EntityListeners(AuditingEntityListener::class)
 data class AgendaEntity(
     @field:Id
-    @field:Column(name = "id")
+    @field:Column(name = "id_agenda")
     val id: String,
     @field:Column(name = "name", nullable = false)
     val name: String,
@@ -31,13 +31,13 @@ data class AgendaEntity(
     var createdAt: LocalDateTime? = null,
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
-    var createdBy: String? = null,
+    var createdBy: String? = "Test create",
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     var updatedAt: LocalDateTime? = null,
     @LastModifiedBy
     @Column(name = "updated_by", nullable = false)
-    var updatedBy: String? = null
+    var updatedBy: String? = "Test update"
 ) {
     fun toModel() = DbAgendaModel(
         id = id,

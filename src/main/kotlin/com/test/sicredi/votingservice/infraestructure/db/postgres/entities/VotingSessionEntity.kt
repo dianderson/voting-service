@@ -11,14 +11,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "agenda")
+@Table(name = "voting_sessions")
 @EntityListeners(AuditingEntityListener::class)
 data class VotingSessionEntity(
     @field:Id
-    @field:Column(name = "id")
+    @field:Column(name = "id_voting_session")
     val id: String,
-    @field:Column(name = "id_agenda", nullable = false)
-    val agendaCode: String,
     @field:Column(name = "start_time", nullable = false)
     val startTime: LocalDateTime,
     @field:Column(name = "duration_in_minutes", nullable = false)
@@ -30,17 +28,20 @@ data class VotingSessionEntity(
     var createdAt: LocalDateTime? = null,
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
-    var createdBy: String? = null,
+    var createdBy: String? = "create test",
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     var updatedAt: LocalDateTime? = null,
     @LastModifiedBy
     @Column(name = "updated_by", nullable = false)
-    var updatedBy: String? = null
+    var updatedBy: String? = "update test",
+    @field:ManyToOne(fetch = FetchType.LAZY)
+    @field:JoinColumn(name = "id_agenda", nullable = false)
+    val agenda: AgendaEntity
 ) {
     fun toModel() = DbVotingSessionModel(
         id = id,
-        agendaCode = agendaCode,
+        agendaCode = agenda.toModel(),
         startTime = startTime,
         durationInMinutes = durationInMinutes,
         allowedRoles = allowedRoles.split(",").map { Roles.valueOf(it) },

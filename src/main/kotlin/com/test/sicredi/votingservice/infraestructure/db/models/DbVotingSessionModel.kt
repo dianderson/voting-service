@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 data class DbVotingSessionModel(
     val id: String,
-    val agendaCode: String,
+    val agendaCode: DbAgendaModel,
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
     val allowedRoles: List<Roles>,

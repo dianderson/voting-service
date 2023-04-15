@@ -1,5 +1,5 @@
 CREATE TABLE voting_sessions (
-    id                  varchar(36) primary key,
+    id_voting_session   varchar(36) primary key,
     id_agenda           varchar(36)  not null,
     start_time          timestamp    not null,
     duration_in_minutes integer      not null,
@@ -8,5 +8,6 @@ CREATE TABLE voting_sessions (
     created_by          varchar(100) not null,
     updated_at          timestamp    not null,
     updated_by          varchar(100) not null,
-    unique (id_agenda, start_time)
+    unique (id_agenda, start_time),
+    foreign key (id_agenda) references agenda (id_agenda)
 );

@@ -1,5 +1,5 @@
 CREATE TABLE agenda (
-    id                varchar(36) primary key,
+    id_agenda         varchar(36) primary key,
     name              varchar(30)  not null,
     subject           varchar(80)  not null,
     comments          varchar(250) not null,
