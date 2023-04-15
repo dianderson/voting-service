@@ -1,5 +1,6 @@
-package com.test.sicredi.votingservice.infraestructure.postgres.entities
+package com.test.sicredi.votingservice.infraestructure.db.postgres.entities
 
+import com.test.sicredi.votingservice.infraestructure.db.models.DbAgendaModel
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
@@ -21,8 +22,8 @@ data class AgendaEntity(
     val subject: String,
     @field:Column(name = "comments", nullable = false)
     val comments: String,
-    @field:Column(name = "start_date", nullable = false)
-    val startDate: LocalDateTime,
+    @field:Column(name = "start_time", nullable = false)
+    val startTime: LocalDateTime,
     @field:Column(name = "duration_in_hours", nullable = false)
     val durationInHours: Long,
     @field:CreatedDate
@@ -37,4 +38,17 @@ data class AgendaEntity(
     @LastModifiedBy
     @Column(name = "updated_by", nullable = false)
     var updatedBy: String? = null
-)
+) {
+    fun toModel() = DbAgendaModel(
+        id = id,
+        name = name,
+        subject = subject,
+        comments = comments,
+        startTime = startTime,
+        durationInHours = durationInHours,
+        createdAt = createdAt!!,
+        createdBy = createdBy!!,
+        updatedAt = updatedAt!!,
+        updatedBy = updatedBy!!
+    )
+}

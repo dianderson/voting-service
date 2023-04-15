@@ -1,5 +1,7 @@
-package com.test.sicredi.votingservice.infraestructure.postgres.entities
+package com.test.sicredi.votingservice.infraestructure.db.postgres.entities
 
+import com.test.sicredi.votingservice.common.enums.Roles
+import com.test.sicredi.votingservice.infraestructure.db.models.DbVotingSessionModel
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedBy
 import org.springframework.data.annotation.CreatedDate
@@ -15,8 +17,10 @@ data class VotingSessionEntity(
     @field:Id
     @field:Column(name = "id")
     val id: String,
-    @field:Column(name = "start_date", nullable = false)
-    val startDate: LocalDateTime,
+    @field:Column(name = "id_agenda", nullable = false)
+    val agendaCode: String,
+    @field:Column(name = "start_time", nullable = false)
+    val startTime: LocalDateTime,
     @field:Column(name = "duration_in_minutes", nullable = false)
     val durationInMinutes: Long,
     @field:Column(name = "allowed_roles", nullable = false)
@@ -32,8 +36,17 @@ data class VotingSessionEntity(
     var updatedAt: LocalDateTime? = null,
     @LastModifiedBy
     @Column(name = "updated_by", nullable = false)
-    var updatedBy: String? = null,
-    @field:Column(name = "id_agenda", nullable = false)
-    @field:ManyToOne
-    val agenda: AgendaEntity //TODO Fazer tabela de relacionamento
-)
+    var updatedBy: String? = null
+) {
+    fun toModel() = DbVotingSessionModel(
+        id = id,
+        agendaCode = agendaCode,
+        startTime = startTime,
+        durationInMinutes = durationInMinutes,
+        allowedRoles = allowedRoles.split(",").map { Roles.valueOf(it) },
+        createdAt = createdAt!!,
+        createdBy = createdBy!!,
+        updatedAt = updatedAt!!,
+        updatedBy = updatedBy!!
+    )
+}

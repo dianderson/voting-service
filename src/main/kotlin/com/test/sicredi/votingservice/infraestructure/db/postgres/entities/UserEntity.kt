@@ -1,4 +1,4 @@
-package com.test.sicredi.votingservice.infraestructure.postgres.entities
+package com.test.sicredi.votingservice.infraestructure.db.postgres.entities
 
 import jakarta.persistence.*
 
