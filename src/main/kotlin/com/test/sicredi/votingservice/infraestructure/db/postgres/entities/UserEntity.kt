@@ -1,5 +1,7 @@
 package com.test.sicredi.votingservice.infraestructure.db.postgres.entities
 
+import com.test.sicredi.votingservice.common.enums.Roles
+import com.test.sicredi.votingservice.infraestructure.db.models.DbUserModel
 import jakarta.persistence.*
 
 @Entity
@@ -20,4 +22,11 @@ data class UserEntity(
         inverseJoinColumns = [JoinColumn(name = "id_role")]
     )
     val roles: Set<RoleEntity>
-)
+) {
+    fun toModel() = DbUserModel(
+        id = id,
+        email = email,
+        password = password,
+        roles = roles.map { Roles.valueOf(it.role.name) }
+    )
+}

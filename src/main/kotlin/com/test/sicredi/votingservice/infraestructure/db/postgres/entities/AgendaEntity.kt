@@ -31,13 +31,13 @@ data class AgendaEntity(
     var createdAt: LocalDateTime? = null,
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
-    var createdBy: String? = "Test create",
+    var createdBy: String? = null,
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     var updatedAt: LocalDateTime? = null,
     @LastModifiedBy
     @Column(name = "updated_by", nullable = false)
-    var updatedBy: String? = "Test update"
+    var updatedBy: String? = null
 ) {
     fun toModel() = DbAgendaModel(
         id = id,
