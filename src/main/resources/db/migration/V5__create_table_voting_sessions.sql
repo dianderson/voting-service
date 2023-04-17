@@ -11,3 +11,5 @@ CREATE TABLE voting_sessions (
     unique (id_agenda, start_time),
     foreign key (id_agenda) references agenda (id_agenda)
 );
+
+CREATE INDEX idx_id_agenda_start_time on voting_sessions (id_agenda, start_time);

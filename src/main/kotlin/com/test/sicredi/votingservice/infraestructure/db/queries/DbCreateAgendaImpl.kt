@@ -12,6 +12,8 @@ class DbCreateAgendaImpl(
     private val agendaRepository: AgendaRepository
 ) : DbCreateAgenda {
     @Transactional
-    override fun execute(input: DbCreateAgendaInput): DbAgendaModel =
-        agendaRepository.save(input.toEntity()).toModel()
+    override fun execute(input: DbCreateAgendaInput): DbAgendaModel = (
+            agendaRepository.findByNameAndStartTime(input.name, input.startTime)
+                ?: agendaRepository.save(input.toEntity())
+            ).toModel()
 }

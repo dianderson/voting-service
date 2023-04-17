@@ -11,3 +11,5 @@ CREATE TABLE agenda (
     updated_by        varchar(100) not null,
     unique (name, start_time)
 );
+
+CREATE INDEX idx_name_start_time on agenda (name, start_time);

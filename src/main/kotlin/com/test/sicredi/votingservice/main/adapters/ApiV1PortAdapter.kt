@@ -21,13 +21,7 @@ class ApiV1PortAdapter(
 ) : ApiV1Port {
     override fun createAgenda(request: CreateAgendaRequest): AgendaResponse =
         createAgenda.execute(request.toCreateAgendaInput())
-            .let { it.agendaModel to it.responseError }
-            .let {
-                it.first?.let { AgendaResponse(response = it.toAgendaResponse()) }
-                    ?: AgendaResponse(
-                        error = it.second
-                    )
-            }
+            .toAgendaResponse()
 
     override fun createVotingSession(request: CreateVotingSessionRequest): VotingSessionResponse? =
         createVotingSession.execute(request.toCreateVotingSessionInput())
