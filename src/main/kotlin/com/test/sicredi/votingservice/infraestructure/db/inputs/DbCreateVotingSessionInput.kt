@@ -1,6 +1,6 @@
 package com.test.sicredi.votingservice.infraestructure.db.inputs
 
-import com.test.sicredi.votingservice.api.v1.requests.VotingRolesRequest
+import com.test.sicredi.votingservice.api.v1.dto.requests.VotingRolesRequest
 import com.test.sicredi.votingservice.infraestructure.db.postgres.entities.AgendaEntity
 import com.test.sicredi.votingservice.infraestructure.db.postgres.entities.VotingSessionEntity
 import java.time.LocalDateTime
@@ -10,15 +10,11 @@ data class DbCreateVotingSessionInput(
     val agendaCode: String,
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
-    val allowedRoles: List<VotingRolesRequest>
+    val allowedRoles: List<VotingRolesRequest>,
+    val votingFields: List<String>
 ) {
     fun toEntity(entity: AgendaEntity) = VotingSessionEntity(
-        id = id,
-        agenda = entity,
-        startTime = startTime,
-        durationInMinutes = durationInMinutes,
-        allowedRoles = allowedRoles.buildString()
+        input = this,
+        agenda = entity
     )
-
-    private fun List<VotingRolesRequest>.buildString() = this.map { it.name }.reduce { a, b -> "$a,$b" }
 }

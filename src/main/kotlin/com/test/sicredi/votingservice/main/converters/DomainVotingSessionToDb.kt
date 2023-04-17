@@ -8,5 +8,6 @@ fun CreateVotingSessionInput.toDbCreateVotingSessionInput() = DbCreateVotingSess
     agendaCode = agendaCode,
     startTime = startTime,
     durationInMinutes = durationInMinutes,
-    allowedRoles = allowedRoles
+    allowedRoles = allowedRoles,
+    votingFields = votingFields
 )

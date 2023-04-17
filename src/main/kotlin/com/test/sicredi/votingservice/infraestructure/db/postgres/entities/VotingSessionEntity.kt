@@ -1,6 +1,8 @@
 package com.test.sicredi.votingservice.infraestructure.db.postgres.entities
 
+import com.test.sicredi.votingservice.api.v1.dto.requests.VotingRolesRequest
 import com.test.sicredi.votingservice.common.enums.Roles
+import com.test.sicredi.votingservice.infraestructure.db.inputs.DbCreateVotingSessionInput
 import com.test.sicredi.votingservice.infraestructure.db.models.DbVotingSessionModel
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedBy
@@ -28,17 +30,32 @@ data class VotingSessionEntity(
     var createdAt: LocalDateTime? = null,
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
-    var createdBy: String? = "create test",
+    var createdBy: String? = null,
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     var updatedAt: LocalDateTime? = null,
     @LastModifiedBy
     @Column(name = "updated_by", nullable = false)
-    var updatedBy: String? = "update test",
+    var updatedBy: String? = null,
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "id_agenda", nullable = false)
     val agenda: AgendaEntity
 ) {
+    @OneToMany(mappedBy = "votingSession", cascade = [CascadeType.ALL])
+    var votingSessionFields: List<VotingFieldsEntity>? = null
+
+    constructor(input: DbCreateVotingSessionInput, agenda: AgendaEntity) : this(
+        id = input.id,
+        agenda = agenda,
+        startTime = input.startTime,
+        durationInMinutes = input.durationInMinutes,
+        allowedRoles = input.allowedRoles.buildString()
+    ) {
+        votingSessionFields = input.votingFields.map {
+            VotingFieldsEntity(it, this)
+        }
+    }
+
     fun toModel() = DbVotingSessionModel(
         id = id,
         agenda = agenda.toModel(),
@@ -50,4 +67,8 @@ data class VotingSessionEntity(
         updatedAt = updatedAt!!,
         updatedBy = updatedBy!!
     )
+
+    companion object {
+        private fun List<VotingRolesRequest>.buildString() = this.map { it.name }.reduce { a, b -> "$a,$b" }
+    }
 }

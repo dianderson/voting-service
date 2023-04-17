@@ -1,11 +1,11 @@
 package com.test.sicredi.votingservice.main.adapters
 
 import com.test.sicredi.votingservice.api.v1.ports.ApiV1Port
-import com.test.sicredi.votingservice.api.v1.requests.CreateAgendaRequest
-import com.test.sicredi.votingservice.api.v1.requests.CreateVotingSessionRequest
-import com.test.sicredi.votingservice.api.v1.requests.VoteRequest
-import com.test.sicredi.votingservice.api.v1.responses.AgendaResponse
-import com.test.sicredi.votingservice.api.v1.responses.VotingSessionResponse
+import com.test.sicredi.votingservice.api.v1.dto.requests.CreateAgendaRequest
+import com.test.sicredi.votingservice.api.v1.dto.requests.CreateVotingSessionRequest
+import com.test.sicredi.votingservice.api.v1.dto.requests.VoteRequest
+import com.test.sicredi.votingservice.api.v1.dto.responses.AgendaResponse
+import com.test.sicredi.votingservice.api.v1.dto.responses.VotingSessionResponse
 import com.test.sicredi.votingservice.domains.agenda.resources.CreateAgenda
 import com.test.sicredi.votingservice.domains.voting_session.resources.CreateVotingSession
 import com.test.sicredi.votingservice.main.converters.toAgendaResponse

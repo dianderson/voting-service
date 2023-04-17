@@ -1,7 +1,7 @@
 package com.test.sicredi.votingservice.api.v1.resources
 
 import com.test.sicredi.votingservice.api.v1.ports.ApiV1Port
-import com.test.sicredi.votingservice.api.v1.requests.CreateVotingSessionRequest
+import com.test.sicredi.votingservice.api.v1.dto.requests.CreateVotingSessionRequest
 import jakarta.validation.Valid
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.PostMapping

@@ -6,3 +6,8 @@ spring:
     name: voting-service
   jpa:
     open-in-view: true
+
+configs:
+  threads:
+    default: 10
+    max: 100

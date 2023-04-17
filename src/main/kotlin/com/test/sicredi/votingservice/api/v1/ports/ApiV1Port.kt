@@ -1,10 +1,10 @@
 package com.test.sicredi.votingservice.api.v1.ports
 
-import com.test.sicredi.votingservice.api.v1.requests.CreateAgendaRequest
-import com.test.sicredi.votingservice.api.v1.requests.CreateVotingSessionRequest
-import com.test.sicredi.votingservice.api.v1.requests.VoteRequest
-import com.test.sicredi.votingservice.api.v1.responses.AgendaResponse
-import com.test.sicredi.votingservice.api.v1.responses.VotingSessionResponse
+import com.test.sicredi.votingservice.api.v1.dto.requests.CreateAgendaRequest
+import com.test.sicredi.votingservice.api.v1.dto.requests.CreateVotingSessionRequest
+import com.test.sicredi.votingservice.api.v1.dto.requests.VoteRequest
+import com.test.sicredi.votingservice.api.v1.dto.responses.AgendaResponse
+import com.test.sicredi.votingservice.api.v1.dto.responses.VotingSessionResponse
 
 interface ApiV1Port {
     fun createAgenda(request: CreateAgendaRequest): AgendaResponse
