@@ -2,6 +2,7 @@ package com.test.sicredi.votingservice.infraestructure.db.queries
 
 import com.test.sicredi.votingservice.infraestructure.db.inputs.DbCreateVotingSessionInput
 import com.test.sicredi.votingservice.infraestructure.db.models.DbVotingSessionModel
+import com.test.sicredi.votingservice.infraestructure.db.postgres.entities.AgendaEntity
 import com.test.sicredi.votingservice.infraestructure.db.postgres.repository.AgendaRepository
 import com.test.sicredi.votingservice.infraestructure.db.postgres.repository.VotingSessionRepository
 import com.test.sicredi.votingservice.infraestructure.db.resources.DbCreateVotingSession
@@ -16,9 +17,12 @@ class DbCreateVotingSessionImpl(
     private val votingSessionRepository: VotingSessionRepository
 ) : DbCreateVotingSession {
     @Transactional
-    override fun execute(input: DbCreateVotingSessionInput): DbVotingSessionModel =
-        agendaRepository.findByIdOrNull(input.agendaCode)
-            .let { it ?: throw EntityNotFoundException("Agenda nao encontrada") }
-            .let { votingSessionRepository.save(input.toEntity(it)) }
-            .toModel()
+    override fun execute(input: DbCreateVotingSessionInput): DbVotingSessionModel = (
+            votingSessionRepository.findByAgendaIdAndStartTime(input.agendaCode, input.startTime)
+                ?: votingSessionRepository.save(input.toEntity(findAgendaById(input.agendaCode)))
+            ).toModel()
+
+    private fun findAgendaById(agendaId: String): AgendaEntity =
+        agendaRepository.findByIdOrNull(agendaId)
+            ?: throw EntityNotFoundException("Agenda not found")
 }
