@@ -2,6 +2,6 @@ package com.test.sicredi.votingservice.infraestructure.db.resources
 
 import com.test.sicredi.votingservice.infraestructure.db.models.DbUserModel
 
-interface FindUserByUserName {
+interface DbFindUserByUserName {
     fun execute(userName: String): DbUserModel?
 }

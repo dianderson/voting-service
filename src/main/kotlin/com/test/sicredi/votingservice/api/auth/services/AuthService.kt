@@ -3,7 +3,7 @@ package com.test.sicredi.votingservice.api.auth.services
 import com.test.sicredi.votingservice.api.auth.dto.AuthResponse
 import com.test.sicredi.votingservice.api.auth.dto.LoginRequest
 import com.test.sicredi.votingservice.api.auth.models.UserSecurity
-import com.test.sicredi.votingservice.infraestructure.db.resources.FindUserByUserName
+import com.test.sicredi.votingservice.infraestructure.db.resources.DbFindUserByUserName
 import org.springframework.security.authentication.AuthenticationServiceException
 import org.springframework.security.oauth2.jwt.*
 import org.springframework.stereotype.Service
@@ -14,7 +14,7 @@ import java.util.*
 class AuthService(
     private val jwtEncoder: JwtEncoder,
     private val jwtDecoder: JwtDecoder,
-    private val findUserByUserName: FindUserByUserName
+    private val findUserByUserName: DbFindUserByUserName
 ) {
     fun signIn(request: LoginRequest): AuthResponse {
         val user = findUserByUserName.execute(request.email)

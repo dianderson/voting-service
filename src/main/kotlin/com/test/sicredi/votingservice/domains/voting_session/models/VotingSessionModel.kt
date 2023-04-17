@@ -1,11 +1,12 @@
-package com.test.sicredi.votingservice.infraestructure.db.models
+package com.test.sicredi.votingservice.domains.voting_session.models
 
 import com.test.sicredi.votingservice.common.enums.Roles
+import com.test.sicredi.votingservice.domains.agenda.models.AgendaModel
 import java.time.LocalDateTime
 
-data class DbVotingSessionModel(
-    val id: String,
-    val agenda: DbAgendaModel,
+data class VotingSessionModel(
+    val code: String,
+    val agenda: AgendaModel,
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
     val allowedRoles: List<Roles>,

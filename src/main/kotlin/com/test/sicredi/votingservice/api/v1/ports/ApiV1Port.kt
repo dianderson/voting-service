@@ -8,6 +8,6 @@ import com.test.sicredi.votingservice.api.v1.responses.VotingSessionResponse
 
 interface ApiV1Port {
     fun createAgenda(request: CreateAgendaRequest): AgendaResponse
-    fun createVotingSession(request: CreateVotingSessionRequest): VotingSessionResponse
+    fun createVotingSession(request: CreateVotingSessionRequest): VotingSessionResponse?
     fun registerVote(request: VoteRequest)
 }

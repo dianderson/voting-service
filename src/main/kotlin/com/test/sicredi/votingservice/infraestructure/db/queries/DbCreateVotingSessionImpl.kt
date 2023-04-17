@@ -4,16 +4,18 @@ import com.test.sicredi.votingservice.infraestructure.db.inputs.DbCreateVotingSe
 import com.test.sicredi.votingservice.infraestructure.db.models.DbVotingSessionModel
 import com.test.sicredi.votingservice.infraestructure.db.postgres.repository.AgendaRepository
 import com.test.sicredi.votingservice.infraestructure.db.postgres.repository.VotingSessionRepository
-import com.test.sicredi.votingservice.infraestructure.db.resources.CreateVotingSession
+import com.test.sicredi.votingservice.infraestructure.db.resources.DbCreateVotingSession
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
-class CreateVotingSessionImpl(
+class DbCreateVotingSessionImpl(
     private val agendaRepository: AgendaRepository,
     private val votingSessionRepository: VotingSessionRepository
-) : CreateVotingSession {
+) : DbCreateVotingSession {
+    @Transactional
     override fun execute(input: DbCreateVotingSessionInput): DbVotingSessionModel =
         agendaRepository.findByIdOrNull(input.agendaCode)
             .let { it ?: throw EntityNotFoundException("Agenda nao encontrada") }

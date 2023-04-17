@@ -41,7 +41,7 @@ data class VotingSessionEntity(
 ) {
     fun toModel() = DbVotingSessionModel(
         id = id,
-        agendaCode = agenda.toModel(),
+        agenda = agenda.toModel(),
         startTime = startTime,
         durationInMinutes = durationInMinutes,
         allowedRoles = allowedRoles.split(",").map { Roles.valueOf(it) },

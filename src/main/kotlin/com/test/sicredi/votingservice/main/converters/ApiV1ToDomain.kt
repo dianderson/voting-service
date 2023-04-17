@@ -2,12 +2,10 @@ package com.test.sicredi.votingservice.main.converters
 
 import com.test.sicredi.votingservice.api.v1.requests.CreateAgendaRequest
 import com.test.sicredi.votingservice.api.v1.requests.CreateVotingSessionRequest
-import com.test.sicredi.votingservice.infraestructure.db.inputs.DbCreateAgendaInput
-import com.test.sicredi.votingservice.infraestructure.db.inputs.DbCreateVotingSessionInput
-import java.util.*
+import com.test.sicredi.votingservice.domains.agenda.inputs.CreateAgendaInput
+import com.test.sicredi.votingservice.domains.voting_session.inputs.CreateVotingSessionInput
 
-fun CreateAgendaRequest.toDbCreateAgendaInput() = DbCreateAgendaInput(
-    id = UUID.randomUUID().toString(),
+fun CreateAgendaRequest.toCreateAgendaInput() = CreateAgendaInput(
     name = name!!,
     subject = subject!!,
     comments = comments!!,
@@ -15,8 +13,7 @@ fun CreateAgendaRequest.toDbCreateAgendaInput() = DbCreateAgendaInput(
     durationInHours = durationInHours!!
 )
 
-fun CreateVotingSessionRequest.toDbCreateVotingSessionInput() = DbCreateVotingSessionInput(
-    id = UUID.randomUUID().toString(),
+fun CreateVotingSessionRequest.toCreateVotingSessionInput() = CreateVotingSessionInput(
     agendaCode = agendaCode!!,
     startTime = startTime!!,
     durationInMinutes = durationInMinutes!!,
