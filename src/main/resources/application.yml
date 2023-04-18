@@ -11,6 +11,8 @@ configs:
   threads:
     default: 10
     max: 100
+  clients:
+    clientUrl: 'https://user-info.herokuapp.com/users'
   kafka:
     group-id: 'voting.service.${spring.profiles.active}'
     concurrency: 5

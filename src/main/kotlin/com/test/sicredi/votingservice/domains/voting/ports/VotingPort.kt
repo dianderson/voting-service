@@ -9,6 +9,7 @@ import com.test.sicredi.votingservice.domains.voting.models.VotingSessionPreview
 interface VotingPort {
     fun sendToProcessing(input: RegisterVoteInput)
     fun findVotingSessionByCode(votingSessionCode: String): DomainVotingVotingSessionModel?
+    fun validateUserByUserName(userName: String): Boolean
     fun registerVote(votingSessionCode: String, votingField: String)
     fun registerUserVote(model: RegisterUserVoteModel)
     fun notifyUser(model: UserNotificationModel)
