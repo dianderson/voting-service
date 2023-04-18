@@ -21,7 +21,7 @@ class CreateVotingSessionTest {
     lateinit var createVotingSession: CreateVotingSessionImpl
 
     @Test
-    fun `should throw`() {
+    fun `should`() {
         val createVotingSessionInput = CreateVotingSessionInputFixture.newCreateVotingSessionInput()
         val votingSessionModel = VotingSessionModelFixture.newVotingSessionModel()
 

@@ -21,7 +21,7 @@ class CreateAgendaTest {
     lateinit var createAgendaImpl: CreateAgendaImpl
 
     @Test
-    fun `should throw`() {
+    fun `should`() {
         val createAgendaInput = CreateAgendaInputFixture.newCreateAgendaInput()
         val agendaModel = AgendaModelFixture.newAgendaModel()
 

@@ -20,7 +20,7 @@ class RegisterVoteTest {
     lateinit var registerVote: RegisterVoteImpl
 
     @Test
-    fun `should throw`() {
+    fun `should`() {
         val registerVoteInput = RegisterVoteInputFixture.newRegisterVoteInput()
 
         `when`(votingPort.registerVote(registerVoteInput.votingSessionCode, registerVoteInput.votedField))
