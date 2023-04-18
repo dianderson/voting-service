@@ -1,1 +1,23 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://postgres-voting-service:5432/voting'
+    username: 'rootvoting'
+    password: 'voting@123'
+  data:
+    redis:
+      ssl: false
+      password: Redis@123
+      connect-timeout: 2s
+      host: redis
+      port: 6379
 
+configs:
+  kafka:
+    server-url: kafka:9092
+    schema-registry-url: http://schema-registry:8081
+
+  auth:
+    jwt-expiration-ms: '3600000'
+    jwt-secret: '69df$5314%Cf5e2#4fA9b@b33d*a95e6Sb1da;e0f9c30fF3TEYbf&5aGea!4311^86fa>S49ceJc2I4Pa72SD55'
+    password-secret: 'b05%Aa85a0*Sbf8f#4a6W9@b18f^c44Te9$e9SD2bd5b'
+    refresh-token-expiration-ms: '3600000'
