@@ -10,6 +10,7 @@ data class VotingSessionModel(
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
     val allowedRoles: List<Roles>,
+    val isSingleVote: Boolean,
     val createdAt: LocalDateTime,
     val createdBy: String,
     val updatedAt: LocalDateTime,

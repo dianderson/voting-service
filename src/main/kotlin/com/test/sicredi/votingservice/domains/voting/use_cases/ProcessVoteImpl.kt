@@ -1,14 +1,16 @@
 package com.test.sicredi.votingservice.domains.voting.use_cases
 
 import com.test.sicredi.votingservice.domains.voting.inputs.ProcessVoteInput
-import com.test.sicredi.votingservice.domains.voting.models.*
+import com.test.sicredi.votingservice.domains.voting.models.DomainVotingVotingSessionModel
+import com.test.sicredi.votingservice.domains.voting.models.RegisterUserVoteModel
+import com.test.sicredi.votingservice.domains.voting.models.ResponseStatus
+import com.test.sicredi.votingservice.domains.voting.models.UserNotificationModel
 import com.test.sicredi.votingservice.domains.voting.ports.VotingPort
 import com.test.sicredi.votingservice.domains.voting.resources.ProcessVote
 import com.test.sicredi.votingservice.domains.voting.rules.HasVoteProcessingValidation
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.prefs.Preferences
 
 @Service
 class ProcessVoteImpl(
@@ -20,8 +22,10 @@ class ProcessVoteImpl(
         try {
             votingPort.findVotingSessionByCode(input.votingSessionCode)
                 .let { it ?: throw EntityNotFoundException("Voting session ${input.votingSessionCode} not found") }
-                .executeValidates(input)
-            input.processCorrectVote()
+                .also { it.executeValidates(input) }
+                .takeIf { it.isSingleVote }
+                ?.let { input.registerUserVote() }
+                .let { input.processCorrectVote() }
         } catch (ex: Exception) {
             UserNotificationModel(
                 userName = input.userName,
@@ -31,25 +35,23 @@ class ProcessVoteImpl(
         }
     }
 
-    private fun DomainVotingVotingSessionModel.executeValidates(input: ProcessVoteInput) =
+    private fun DomainVotingVotingSessionModel.executeValidates(input: ProcessVoteInput) {
         validates.map { it.execute(input, this) }
+    }
+
+    private fun ProcessVoteInput.registerUserVote() {
+        RegisterUserVoteModel(
+            votingSessionCode = votingSessionCode,
+            votingField = votedField,
+            userName = userName
+        ).let { votingPort.registerUserVote(it) }
+    }
 
     private fun ProcessVoteInput.processCorrectVote() {
         votingPort.registerVote(votingSessionCode, votedField)
-            .sendNotifyTheVotePreview()
-        sendUserNotification()
-    }
-
-    private fun VotingSessionPreviewModel.sendNotifyTheVotePreview() =
-        VotingSessionPreviewModel(
-            votingSessionCode = votingSessionCode,
-            timeLeftInMinutes = timeLeftInMinutes,
-            fieldPreview = fieldPreview
-        ).let { votingPort.notifyTheVotePreview(it) }
-
-    private fun ProcessVoteInput.sendUserNotification() =
         UserNotificationModel(
             responseStatus = ResponseStatus.SUCCESS,
             userName = userName
         ).let { votingPort.notifyUser(it) }
+    }
 }

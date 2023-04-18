@@ -20,7 +20,8 @@ fun CreateVotingSessionRequest.toCreateVotingSessionInput() = CreateVotingSessio
     startTime = startTime!!,
     durationInMinutes = durationInMinutes!!,
     allowedRoles = allowedRoles!!,
-    votingFields = votingFields!!
+    votingFields = votingFields!!,
+    isSingleVote = isSingleVote!!
 )
 
 fun VoteRegister.toRegisterVoteInput() = RegisterVoteInput(

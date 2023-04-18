@@ -45,7 +45,7 @@ class VoteRegistrationProducer(
 
     private fun Message<VotingRegistrationAvro>.publicWithCallback() {
         try {
-            kafkaTemplate.send(this) //TODO PROBLEMA NO AVRO FIELD USERNAME
+            kafkaTemplate.send(this)
             logger.info("Message posted: $this")
         } catch (ex: Exception) {
             logger.error("The message $this generated error $ex")

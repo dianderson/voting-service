@@ -25,6 +25,8 @@ data class VotingSessionEntity(
     val durationInMinutes: Long,
     @field:Column(name = "allowed_roles", nullable = false)
     val allowedRoles: String,
+    @field:Column(name = "is_single_vote", nullable = false)
+    val isSingleVote: Boolean,
     @field:CreatedDate
     @field:Column(name = "created_at", nullable = false, updatable = false)
     var createdAt: LocalDateTime? = null,
@@ -49,7 +51,8 @@ data class VotingSessionEntity(
         agenda = agenda,
         startTime = input.startTime,
         durationInMinutes = input.durationInMinutes,
-        allowedRoles = input.allowedRoles.buildString()
+        allowedRoles = input.allowedRoles.buildString(),
+        isSingleVote = input.isSingleVote
     ) {
         votingSessionFields = input.votingFields.map {
             VotingFieldsEntity(it, this)
@@ -62,6 +65,7 @@ data class VotingSessionEntity(
         startTime = startTime,
         durationInMinutes = durationInMinutes,
         allowedRoles = allowedRoles.split(",").map { Roles.valueOf(it) },
+        isSingleVote = isSingleVote,
         fields = votingSessionFields!!.map { it.toModel() },
         createdAt = createdAt!!,
         createdBy = createdBy!!,

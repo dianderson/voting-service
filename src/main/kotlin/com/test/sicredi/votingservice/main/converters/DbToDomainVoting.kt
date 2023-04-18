@@ -11,6 +11,7 @@ fun DbVotingSessionModel.toDomainVotingVotingSessionModel() = DomainVotingVoting
     startTime = startTime,
     durationInMinutes = durationInMinutes,
     allowedRoles = allowedRoles,
+    isSingleVote = isSingleVote,
     votingFields = fields.map { it.name }
 )
 

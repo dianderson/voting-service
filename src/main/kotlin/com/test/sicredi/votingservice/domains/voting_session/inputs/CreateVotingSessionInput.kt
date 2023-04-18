@@ -10,5 +10,6 @@ data class CreateVotingSessionInput(
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
     val allowedRoles: List<VotingRolesRequest>,
-    val votingFields: List<String>
+    val votingFields: List<String>,
+    val isSingleVote: Boolean
 )

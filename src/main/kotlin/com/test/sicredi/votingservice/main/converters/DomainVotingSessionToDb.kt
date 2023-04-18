@@ -9,5 +9,6 @@ fun CreateVotingSessionInput.toDbCreateVotingSessionInput() = DbCreateVotingSess
     startTime = startTime,
     durationInMinutes = durationInMinutes,
     allowedRoles = allowedRoles,
-    votingFields = votingFields
+    votingFields = votingFields,
+    isSingleVote = isSingleVote
 )

@@ -15,5 +15,7 @@ data class CreateVotingSessionRequest(
     @field:NotEmpty
     val allowedRoles: List<VotingRolesRequest>? = listOf(VotingRolesRequest.USER),
     @field:NotEmpty
-    val votingFields: List<String>?
+    val votingFields: List<String>?,
+    @field:NotNull
+    val isSingleVote: Boolean?
 )

@@ -9,6 +9,7 @@ fun DbVotingSessionModel.toVotingSessionModel() = VotingSessionModel(
     startTime = startTime,
     durationInMinutes = durationInMinutes,
     allowedRoles = allowedRoles,
+    isSingleVote = isSingleVote,
     createdAt = createdAt,
     createdBy = createdBy,
     updatedAt = updatedAt,

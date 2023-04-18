@@ -11,20 +11,9 @@ import java.time.LocalDateTime
 
 @Component
 class DbRegisterVoteImpl(
-    private val votingFieldsRepository: VotingFieldsRepository,
-    private val votingSessionRepository: VotingSessionRepository
+    private val votingFieldsRepository: VotingFieldsRepository
 ) : DbRegisterVote {
-    override fun execute(votingSessionCode: String, votingField: String): DbVotingSessionPreviewModel =
+    override fun execute(votingSessionCode: String, votingField: String) {
         votingFieldsRepository.registerVote(votingSessionCode, votingField)
-            .let { votingSessionRepository.findByIdOrNull(votingSessionCode) }
-            ?.toDbVotingSessionPreviewModel()!!
-
-    private fun VotingSessionEntity.toDbVotingSessionPreviewModel() = DbVotingSessionPreviewModel(
-        votingSessionCode = id,
-        timeLeftInMinutes = (startTime.minute + durationInMinutes).getTimeLeft(),
-        fieldPreview = votingSessionFields!!.map { it.toModel() }
-    )
-
-    private fun Long.getTimeLeft(): Long =
-        this.minus(LocalDateTime.now().minute)
+    }
 }

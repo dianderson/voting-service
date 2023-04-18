@@ -7,5 +7,6 @@ data class DomainVotingVotingSessionModel(
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
     val allowedRoles: List<Roles>,
+    val isSingleVote: Boolean,
     val votingFields: List<String>
 )
