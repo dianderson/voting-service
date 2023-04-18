@@ -1,0 +1,27 @@
+{
+"name": "VotingRegistrationAvro",
+"type": "record",
+"namespace": "com.test.sicredi.avros",
+  "fields": [
+    {
+      "name": "votingSessionCode",
+      "type": "string",
+      "doc": "Voting Session Random Unique Identifier - ex: 123e4567-e89b-12d3-a456-426655440000"
+    },
+    {
+      "name": "votedField",
+      "type": "string",
+      "doc": "Field for voting - ex: yes, no"
+    },
+    {
+      "name": "userRoles",
+      "type": "string",
+      "doc": "Roles that can vote - ex: MASTER, ADMIN, USER"
+    },
+    {
+      "name": "instant",
+      "type": "long",
+      "doc": "Voting instant in seconds - ex: 1681764028"
+    }
+  ]
+}
