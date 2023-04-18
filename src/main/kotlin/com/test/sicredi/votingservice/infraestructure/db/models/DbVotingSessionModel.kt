@@ -9,6 +9,7 @@ data class DbVotingSessionModel(
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
     val allowedRoles: List<Roles>,
+    val fields: List<DbVotingFieldsModel>,
     val createdAt: LocalDateTime,
     val createdBy: String,
     val updatedAt: LocalDateTime,

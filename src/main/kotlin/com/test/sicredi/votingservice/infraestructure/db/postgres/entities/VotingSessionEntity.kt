@@ -62,6 +62,7 @@ data class VotingSessionEntity(
         startTime = startTime,
         durationInMinutes = durationInMinutes,
         allowedRoles = allowedRoles.split(",").map { Roles.valueOf(it) },
+        fields = votingSessionFields!!.map { it.toModel() },
         createdAt = createdAt!!,
         createdBy = createdBy!!,
         updatedAt = updatedAt!!,

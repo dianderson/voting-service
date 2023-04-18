@@ -1,5 +1,6 @@
 package com.test.sicredi.votingservice.infraestructure.db.postgres.entities
 
+import com.test.sicredi.votingservice.infraestructure.db.models.DbVotingFieldsModel
 import com.test.sicredi.votingservice.infraestructure.db.postgres.pk.VotingFieldsPK
 import jakarta.persistence.*
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -23,5 +24,10 @@ data class VotingFieldsEntity(
         name = name,
         quantity = 0,
         votingSession = votingSession
+    )
+
+    fun toModel(): DbVotingFieldsModel = DbVotingFieldsModel(
+        name = name,
+        quantity = quantity
     )
 }

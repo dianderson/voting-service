@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
 
 @RestController
-@RequestMapping("/v1/voting-session")
+@RequestMapping("/v1/voting-sessions")
 @PreAuthorize("hasAnyAuthority('USER','ADMIN','MASTER')")
 class VotingResource(
     private val apiV1Port: ApiV1Port
@@ -26,6 +26,7 @@ class VotingResource(
         @PathVariable("voting-session-code") votingSessionCode: String
     ) {
         VoteRegister(
+            userName = userLogged.userName,
             votingSessionCode = votingSessionCode,
             votedField = request.field,
             userRoles = userLogged.roles.map { Roles.valueOf(it.authority) },

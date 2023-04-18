@@ -4,6 +4,11 @@
 "namespace": "com.test.sicredi.avros",
   "fields": [
     {
+      "name": "userName",
+      "type": "string",
+      "doc": "User name - ex: user@test.com"
+    },
+    {
       "name": "votingSessionCode",
       "type": "string",
       "doc": "Voting Session Random Unique Identifier - ex: 123e4567-e89b-12d3-a456-426655440000"

@@ -4,6 +4,7 @@ import com.test.sicredi.votingservice.common.enums.Roles
 import java.time.LocalDateTime
 
 data class VoteRegister(
+    val userName: String,
     val votingSessionCode: String,
     val votedField: String,
     val userRoles: List<Roles>,

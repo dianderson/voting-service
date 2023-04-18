@@ -1,9 +1,9 @@
-package com.test.sicredi.votingservice.infraestructure.kafka.models
+package com.test.sicredi.votingservice.domains.voting.inputs
 
 import com.test.sicredi.votingservice.common.enums.Roles
 import java.time.LocalDateTime
 
-data class KafkaRegisterVotingModel(
+data class ProcessVoteInput(
     val userName: String,
     val votingSessionCode: String,
     val votedField: String,

@@ -24,6 +24,7 @@ fun CreateVotingSessionRequest.toCreateVotingSessionInput() = CreateVotingSessio
 )
 
 fun VoteRegister.toRegisterVoteInput() = RegisterVoteInput(
+    userName = userName,
     votingSessionCode = votingSessionCode,
     votedField = votedField,
     userRoles = userRoles,

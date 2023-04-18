@@ -12,6 +12,8 @@ configs:
     default: 10
     max: 100
   kafka:
+    group-id: 'voting.service.${spring.profiles.active}'
+    concurrency: 5
     topics:
       voting-registration:
         name: 'voting.registration.${spring.profiles.active}'

@@ -29,6 +29,7 @@ class VoteRegistrationProducer(
     }
 
     private fun KafkaRegisterVotingModel.toAvro() = VotingRegistrationAvro.newBuilder()
+        .setUserName(userName)
         .setVotingSessionCode(votingSessionCode)
         .setVotedField(votedField)
         .setUserRoles(userRoles.map { it.name }.reduce { a, b -> "$a,$b" })
@@ -44,7 +45,7 @@ class VoteRegistrationProducer(
 
     private fun Message<VotingRegistrationAvro>.publicWithCallback() {
         try {
-            kafkaTemplate.send(this)
+            kafkaTemplate.send(this) //TODO PROBLEMA NO AVRO FIELD USERNAME
             logger.info("Message posted: $this")
         } catch (ex: Exception) {
             logger.error("The message $this generated error $ex")
