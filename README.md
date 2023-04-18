@@ -8,7 +8,7 @@
 
 #### To follow the logs ####
 
-    docker logs --follow avro-kafka-producer-app
+    docker logs --follow  voting-service-app
 
 ## To run in IDE ##
 
