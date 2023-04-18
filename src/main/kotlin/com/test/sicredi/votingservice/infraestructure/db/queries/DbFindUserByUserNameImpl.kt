@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component
 class DbFindUserByUserNameImpl(
     private val userRepository: UserRepository
 ) : DbFindUserByUserName {
-    override fun execute(email: String): DbUserModel? =
-        userRepository.findByEmail(email)?.toModel()
+    override fun execute(userName: String): DbUserModel? =
+        userRepository.findByEmail(userName)?.toModel()
 }
