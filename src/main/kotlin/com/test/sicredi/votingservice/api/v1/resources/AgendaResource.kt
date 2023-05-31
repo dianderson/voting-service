@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/v1/agenda")
+@RequestMapping("/v1/agendas")
 @PreAuthorize("hasAnyAuthority('MASTER')")
 class AgendaResource(
     private val apiV1Port: ApiV1Port

@@ -7,7 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/agenda/{agenda-code}/voting-sessions")
+@RequestMapping("/v1/agendas/{agenda-code}/voting-sessions")
 @PreAuthorize("hasAnyAuthority('ADMIN','MASTER')")
 class VotingSessionResource(
     private val apiV1Port: ApiV1Port

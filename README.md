@@ -50,13 +50,12 @@ Set active profiles to: local
 
 ### Voting session endpoint ###
 
-    [POST] localhost:8080/v1/voting-sessions
+    [POST] localhost:8080/v1/agenda/{agenda-code}/voting-sessions
 
 #### It is necessary to send 6 mandatory parameters
 
 | Request Parameter | What is It                           |
-|-------------------|--------------------------------------|
-| agendaCode        | Code of agenda                       |  
+|-------------------|--------------------------------------|                    |  
 | startTime         | Voting session opening time          |  
 | durationInMinutes | Expected duration in minutes         |
 | allowedRoles      | Roles accepted to vote               |  

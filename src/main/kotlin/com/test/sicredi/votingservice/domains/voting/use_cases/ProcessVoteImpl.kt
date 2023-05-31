@@ -22,7 +22,7 @@ class ProcessVoteImpl(
         try {
             votingPort.findVotingSessionByCode(input.votingSessionCode)
                 .let { it ?: throw EntityNotFoundException("Voting session ${input.votingSessionCode} not found") }
-                .also { it.executeValidates(input) }
+                .also { it.executeVoteValidates(input) }
                 .takeIf { it.isSingleVote }
                 ?.let { input.registerUserVote() }
                 .let { input.processCorrectVote() }
@@ -35,7 +35,7 @@ class ProcessVoteImpl(
         }
     }
 
-    private fun DomainVotingVotingSessionModel.executeValidates(input: ProcessVoteInput) {
+    private fun DomainVotingVotingSessionModel.executeVoteValidates(input: ProcessVoteInput) {
         validates.map { it.execute(input, this) }
     }
 
