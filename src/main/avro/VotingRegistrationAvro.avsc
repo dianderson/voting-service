@@ -1,7 +1,7 @@
 {
 "name": "VotingRegistrationAvro",
 "type": "record",
-"namespace": "com.test.sicredi.avros",
+"namespace": "com.test.sicredi.avro",
   "fields": [
     {
       "name": "userName",

@@ -15,8 +15,8 @@ fun CreateAgendaRequest.toCreateAgendaInput() = CreateAgendaInput(
     durationInHours = durationInHours!!
 )
 
-fun CreateVotingSessionRequest.toCreateVotingSessionInput() = CreateVotingSessionInput(
-    agendaCode = agendaCode!!,
+fun CreateVotingSessionRequest.toCreateVotingSessionInput(agendaCode: String) = CreateVotingSessionInput(
+    agendaCode = agendaCode,
     startTime = startTime!!,
     durationInMinutes = durationInMinutes!!,
     allowedRoles = allowedRoles!!,

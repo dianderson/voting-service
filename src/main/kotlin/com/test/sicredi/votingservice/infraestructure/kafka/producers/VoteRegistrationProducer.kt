@@ -1,6 +1,6 @@
 package com.test.sicredi.votingservice.infraestructure.kafka.producers
 
-import com.test.sicredi.avros.VotingRegistrationAvro
+import com.test.sicredi.avro.VotingRegistrationAvro
 import com.test.sicredi.votingservice.infraestructure.kafka.models.KafkaRegisterVotingModel
 import com.test.sicredi.votingservice.infraestructure.kafka.resources.PublishVotingRegistration
 import org.apache.logging.log4j.LogManager

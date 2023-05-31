@@ -4,8 +4,6 @@ import jakarta.validation.constraints.*
 import java.time.LocalDateTime
 
 data class CreateVotingSessionRequest(
-    @field:NotBlank
-    val agendaCode: String?,
     @field:NotNull
     @field:FutureOrPresent
     val startTime: LocalDateTime?,

@@ -22,8 +22,8 @@ class ApiV1PortAdapter(
         createAgenda.execute(request.toCreateAgendaInput())
             .toAgendaResponse()
 
-    override fun createVotingSession(request: CreateVotingSessionRequest): VotingSessionResponse? =
-        createVotingSession.execute(request.toCreateVotingSessionInput())
+    override fun createVotingSession(agendaCode: String, request: CreateVotingSessionRequest): VotingSessionResponse? =
+        createVotingSession.execute(request.toCreateVotingSessionInput(agendaCode))
             ?.toVotingSessionResponse()
 
     override fun registerVote(request: VoteRegister) {
