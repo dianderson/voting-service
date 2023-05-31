@@ -8,6 +8,7 @@ data class DbVotingSessionModel(
     val agenda: DbAgendaModel,
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
+    val endTime: LocalDateTime,
     val allowedRoles: List<Roles>,
     val isSingleVote: Boolean,
     val fields: List<DbVotingFieldsModel>,

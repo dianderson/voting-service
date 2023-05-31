@@ -23,6 +23,8 @@ data class VotingSessionEntity(
     val startTime: LocalDateTime,
     @field:Column(name = "duration_in_minutes", nullable = false)
     val durationInMinutes: Long,
+    @field:Column(name = "end_time", nullable = false)
+    val endTime: LocalDateTime,
     @field:Column(name = "allowed_roles", nullable = false)
     val allowedRoles: String,
     @field:Column(name = "is_single_vote", nullable = false)
@@ -50,6 +52,7 @@ data class VotingSessionEntity(
         id = input.id,
         agenda = agenda,
         startTime = input.startTime,
+        endTime = input.startTime.plusMinutes(input.durationInMinutes),
         durationInMinutes = input.durationInMinutes,
         allowedRoles = input.allowedRoles.buildString(),
         isSingleVote = input.isSingleVote
@@ -64,6 +67,7 @@ data class VotingSessionEntity(
         agenda = agenda.toModel(),
         startTime = startTime,
         durationInMinutes = durationInMinutes,
+        endTime = endTime,
         allowedRoles = allowedRoles.split(",").map { Roles.valueOf(it) },
         isSingleVote = isSingleVote,
         fields = votingSessionFields!!.map { it.toModel() },

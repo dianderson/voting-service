@@ -3,6 +3,7 @@ CREATE TABLE voting_sessions (
     id_agenda           varchar(36)  not null,
     start_time          timestamp    not null,
     duration_in_minutes integer      not null,
+    end_time            timestamp    not null,
     allowed_roles       varchar(100) not null,
     is_single_vote      boolean      not null,
     created_at          timestamp    not null,

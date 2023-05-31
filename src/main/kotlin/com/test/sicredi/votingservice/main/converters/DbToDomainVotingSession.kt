@@ -8,6 +8,7 @@ fun DbVotingSessionModel.toVotingSessionModel() = VotingSessionModel(
     agenda = agenda.toAgendaModel(),
     startTime = startTime,
     durationInMinutes = durationInMinutes,
+    endTime = endTime,
     allowedRoles = allowedRoles,
     isSingleVote = isSingleVote,
     createdAt = createdAt,

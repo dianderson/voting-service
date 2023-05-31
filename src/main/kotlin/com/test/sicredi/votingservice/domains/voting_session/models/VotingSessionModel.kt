@@ -9,6 +9,7 @@ data class VotingSessionModel(
     val agenda: AgendaModel,
     val startTime: LocalDateTime,
     val durationInMinutes: Long,
+    val endTime: LocalDateTime,
     val allowedRoles: List<Roles>,
     val isSingleVote: Boolean,
     val createdAt: LocalDateTime,
