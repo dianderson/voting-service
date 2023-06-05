@@ -11,9 +11,13 @@ spring:
       host: redis
       port: 6379
 
+schedules:
+  voting-result:
+    cron: "0 1/1 * ? * *"
+
 configs:
   kafka:
-    server-url: kafka:9092
+    server-url: kafka:29092
     schema-registry-url: http://schema-registry:8081
 
   auth:
