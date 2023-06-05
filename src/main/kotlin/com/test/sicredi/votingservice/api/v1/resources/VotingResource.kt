@@ -18,7 +18,7 @@ import java.time.LocalDateTime
 class VotingResource(
     private val apiV1Port: ApiV1Port
 ) {
-    @PostMapping("/{voting-session-code}/vote")
+    @PostMapping("/{voting-session-code}/votes")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun registerVote(
         @RequestBody @Valid request: VoteRequest,

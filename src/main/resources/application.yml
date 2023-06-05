@@ -20,7 +20,13 @@ configs:
       voting-registration:
         name: 'voting.registration.${spring.profiles.active}'
         ttl-in-days: 1
+      voting-result:
+        name: 'voting.result.${spring.profiles.active}'
+        ttl-in-days: 1
     topic-props:
       - name: ${configs.kafka.topics.voting-registration.name}
+        partitions: 3
+        replication-factory: 1
+      - name: ${configs.kafka.topics.voting-result.name}
         partitions: 3
         replication-factory: 1

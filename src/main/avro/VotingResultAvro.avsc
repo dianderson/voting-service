@@ -1,0 +1,35 @@
+{
+"name": "VotingResultAvro",
+"type": "record",
+"namespace": "com.test.sicredi.avro",
+  "fields": [
+    {
+      "name": "code",
+      "type": "string"
+    },
+    {
+      "name": "agendaCode",
+      "type": "string"
+    },
+    {
+      "name": "startTime",
+      "type": "string"
+    },
+    {
+      "name": "durationInMinutes",
+      "type": "long"
+    },
+    {
+      "name": "endTime",
+      "type": "string"
+    },
+    {
+      "name": "allowedRoles",
+      "type": "string"
+    },
+    {
+      "name": "isSingleVote",
+      "type": "boolean"
+    }
+  ]
+}

@@ -8,4 +8,5 @@ import java.time.LocalDateTime
 @Repository
 interface VotingSessionRepository : JpaRepository<VotingSessionEntity, String> {
     fun findByAgendaIdAndStartTime(agendaId: String, startTime: LocalDateTime): VotingSessionEntity?
+    fun findAllByEndTimeBefore(now: LocalDateTime): List<VotingSessionEntity>
 }
