@@ -28,6 +28,16 @@
       "type": "string"
     },
     {
+      "name": "fields",
+      "type":{
+        "type": "array",
+              "items": {
+                "name": "field",
+                "type": "VotingFieldAvro"
+              }
+      }
+    },
+    {
       "name": "isSingleVote",
       "type": "boolean"
     }

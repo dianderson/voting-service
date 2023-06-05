@@ -1,6 +1,8 @@
 package com.test.sicredi.votingservice.infraestructure.kafka.producers
 
+import com.test.sicredi.avro.VotingFieldAvro
 import com.test.sicredi.avro.VotingResultAvro
+import com.test.sicredi.votingservice.infraestructure.kafka.models.KafkaVotingFieldsModel
 import com.test.sicredi.votingservice.infraestructure.kafka.models.KafkaVotingResultModel
 import com.test.sicredi.votingservice.infraestructure.kafka.resources.PublishVotingResult
 import org.apache.logging.log4j.LogManager
@@ -34,7 +36,13 @@ class VotingResultProducer(
         .setDurationInMinutes(durationInMinutes)
         .setEndTime(endTime.toString())
         .setAllowedRoles(allowedRoles.map { it.name }.reduce { a, b -> "$a,$b" })
+        .setFields(fields.map { it.toAvro() })
         .setIsSingleVote(isSingleVote)
+        .build()
+
+    private fun KafkaVotingFieldsModel.toAvro() = VotingFieldAvro.newBuilder()
+        .setName(name)
+        .setQuantity(quantity)
         .build()
 
     private fun VotingResultAvro.buildMessageWithPayload() = MessageBuilder.withPayload(this)

@@ -11,6 +11,9 @@ class VotingResultProcessorImpl(
 ) : VotingResultProcessor {
     override fun execute() {
         votingSessionPort.findAllClosedVotingSession(LocalDateTime.now())
-            .forEach { votingSessionModel -> votingSessionPort.notifyVotingResult(votingSessionModel) }
+            .forEach { votingSessionModel ->
+                votingSessionPort.notifyVotingResult(votingSessionModel)
+                votingSessionPort.updateToNotified(votingSessionModel.code)
+            }
     }
 }

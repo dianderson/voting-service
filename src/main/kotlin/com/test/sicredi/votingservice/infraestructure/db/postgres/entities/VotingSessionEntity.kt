@@ -29,6 +29,8 @@ data class VotingSessionEntity(
     val allowedRoles: String,
     @field:Column(name = "is_single_vote", nullable = false)
     val isSingleVote: Boolean,
+    @field:Column(name = "notified", nullable = false)
+    val notified: Boolean,
     @field:CreatedDate
     @field:Column(name = "created_at", nullable = false, updatable = false)
     var createdAt: LocalDateTime? = null,
@@ -45,7 +47,7 @@ data class VotingSessionEntity(
     @field:JoinColumn(name = "id_agenda", nullable = false)
     val agenda: AgendaEntity
 ) {
-    @OneToMany(mappedBy = "votingSession", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "votingSession", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var votingSessionFields: List<VotingFieldsEntity>? = null
 
     constructor(input: DbCreateVotingSessionInput, agenda: AgendaEntity) : this(
@@ -55,7 +57,8 @@ data class VotingSessionEntity(
         endTime = input.startTime.plusMinutes(input.durationInMinutes),
         durationInMinutes = input.durationInMinutes,
         allowedRoles = input.allowedRoles.buildString(),
-        isSingleVote = input.isSingleVote
+        isSingleVote = input.isSingleVote,
+        notified = false
     ) {
         votingSessionFields = input.votingFields.map {
             VotingFieldsEntity(it, this)

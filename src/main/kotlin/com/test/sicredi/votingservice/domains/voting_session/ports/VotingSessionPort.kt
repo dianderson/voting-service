@@ -8,4 +8,5 @@ interface VotingSessionPort {
     fun createVotingSession(input: CreateVotingSessionInput): VotingSessionModel
     fun findAllClosedVotingSession(now: LocalDateTime): List<VotingSessionModel>
     fun notifyVotingResult(votingSessionModel: VotingSessionModel)
+    fun updateToNotified(code: String)
 }

@@ -10,5 +10,6 @@ data class KafkaVotingResultModel(
     val durationInMinutes: Long,
     val endTime: LocalDateTime,
     val allowedRoles: List<Roles>,
+    val fields: List<KafkaVotingFieldsModel>,
     val isSingleVote: Boolean
 )

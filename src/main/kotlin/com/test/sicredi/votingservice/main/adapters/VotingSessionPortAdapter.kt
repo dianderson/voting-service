@@ -5,6 +5,7 @@ import com.test.sicredi.votingservice.domains.voting_session.models.VotingSessio
 import com.test.sicredi.votingservice.domains.voting_session.ports.VotingSessionPort
 import com.test.sicredi.votingservice.infraestructure.db.resources.DbCreateVotingSession
 import com.test.sicredi.votingservice.infraestructure.db.resources.DbFindAllClosedVotingSession
+import com.test.sicredi.votingservice.infraestructure.db.resources.DbUpdateVotingSessionToNotified
 import com.test.sicredi.votingservice.infraestructure.kafka.resources.PublishVotingResult
 import com.test.sicredi.votingservice.main.converters.toDbCreateVotingSessionInput
 import com.test.sicredi.votingservice.main.converters.toKafkaVotingResultModel
@@ -16,7 +17,8 @@ import java.time.LocalDateTime
 class VotingSessionPortAdapter(
     private val publishVotingResult: PublishVotingResult,
     private val createVotingSession: DbCreateVotingSession,
-    private val findAllClosedVotingSession: DbFindAllClosedVotingSession
+    private val findAllClosedVotingSession: DbFindAllClosedVotingSession,
+    private val updateVotingSessionToNotified: DbUpdateVotingSessionToNotified
 ) : VotingSessionPort {
     override fun createVotingSession(input: CreateVotingSessionInput): VotingSessionModel =
         createVotingSession.execute(
@@ -28,5 +30,9 @@ class VotingSessionPortAdapter(
 
     override fun notifyVotingResult(votingSessionModel: VotingSessionModel) {
         publishVotingResult.execute(votingSessionModel.toKafkaVotingResultModel())
+    }
+
+    override fun updateToNotified(code: String) {
+        updateVotingSessionToNotified.execute(code)
     }
 }

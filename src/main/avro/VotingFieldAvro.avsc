@@ -1,0 +1,15 @@
+{
+"name": "VotingFieldAvro",
+"type": "record",
+"namespace": "com.test.sicredi.avro",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "quantity",
+      "type": "long"
+    }
+  ]
+}
