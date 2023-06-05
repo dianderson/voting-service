@@ -36,7 +36,7 @@ Set active profiles to: local
 
 ### Agenda endpoint ###
 
-    [POST] localhost:8080/v1/agenda
+    [POST] localhost:8080/v1/agendas
 
 #### It is necessary to send 5 mandatory parameters
 
@@ -50,7 +50,7 @@ Set active profiles to: local
 
 ### Voting session endpoint ###
 
-    [POST] localhost:8080/v1/agenda/{agenda-code}/voting-sessions
+    [POST] localhost:8080/v1/agendas/{agenda-code}/voting-sessions
 
 #### It is necessary to send 6 mandatory parameters
 
@@ -64,7 +64,7 @@ Set active profiles to: local
 
 ### Voting endpoint ###
 
-    [POST] localhost:8080/v1/voting-sessions/{voting-session-id}/vote
+    [POST] localhost:8080/v1/voting-sessions/{voting-session-id}/votes
 
 #### It is necessary to send 1 mandatory parameters
 
